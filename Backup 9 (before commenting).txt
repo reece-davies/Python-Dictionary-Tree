@@ -1,0 +1,128 @@
+# COMP3002 assignment - Task 2B
+# Depth First & Breadth First Traversal with Dictionary-based binary trees
+
+# Depth First search (PREORDER)
+def depthFirstSearch_preorder(tree):
+    visited = set() # Set to keep track of visited nodes.
+
+    def dfs(visited, tree, node):
+        if node not in visited:
+            print (node)
+            visited.add(node)
+            for i in range(len(tree['children'])):
+                dfs(visited, tree['children'][i], tree['children'][i]['value'])
+
+    dfs(visited, tree, tree['value'])
+
+
+
+# Breadth First search (PREORDER)
+def breadthFirstSearch(tree):
+    #print("Node value : ", tree['value'], "\n")   
+    
+    queue = []
+    queue.append(tree)
+    #print(queue[0])
+
+    while(len(queue) > 0):
+        #print("queue[0] value ", queue[0]['value'])
+        print("Node value = ", queue[0]['value'])
+        tree = queue.pop(0)
+
+        if tree['children'] is not None:
+            for i in range(len(tree['children'])):
+                queue.append(tree['children'][i])
+
+
+dictionaryTreeOld = {
+    'value' : 5,
+    'children' : [
+        {
+            'value' : 7,
+            'children' : [
+                {
+                    'value' : 1,
+                    'children' : []               
+                },
+                {
+                    'value' : 4,
+                    'children' : [
+                        {
+                            'value' : 3,
+                            'children' : []
+                        }] 
+                }]
+        },
+        {
+            'value' : 2,
+            'children' : []
+        },
+        {
+            'value' : 8,
+            'children' : []
+        }
+    ]}
+
+dictionaryTree = {
+    'value' : 5,
+    'children' : [
+        {
+            'value' : 8,
+            'children' : [
+                {
+                    'value' : 4,
+                    'children' : []               
+                },
+                {
+                    'value' : 7,
+                    'children' : [
+                        {
+                            'value' : 9,
+                            'children' : []
+                        }] 
+                }]
+        },
+        {
+            'value' : 3,
+            'children' : []
+        },
+        {
+            'value' : 10,
+            'children' : [
+                {
+                    'value' : 1,
+                    'children' : []               
+                }]
+        }
+    ]}
+
+print("Tree = ", dictionaryTree, "\n")
+print("-- Tree visualisation --")
+print("            5")
+print("         /  |  \ ")
+print("        7   2   8")
+print("      /   \ ")
+print("     1     4")
+print("          / ")
+print("        3")
+
+print("\n -- Depth first traversal (PREORDER) -- ")
+print("Expected output: X")
+depthFirstSearch_preorder(dictionaryTree)
+
+
+print("\n -- Breadth first traversal (PREORDER) -- ")
+print("Expected output: X")
+breadthFirstSearch(dictionaryTree)
+
+# Lorem ipsum:
+# 1. Expected output
+# 2. Tree visualisation
+# 3. DF Nice printing
+# 4. Commenting + neaten code
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+# COMP3002 assignment - Task 2B
+# Depth First & Breadth First Traversal with Dictionary-based binary trees
+
+# https://stackoverflow.com/questions/17107973/python-tree-like-implementation-of-dict-datastructure
+
+class Node:
+    def __init__(self, data):
+
+        self.left = None
+        self.right = None
+        self.data = data
+
+    # Insert new node
+    def insert(self, data):
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+        else:
+            self.data = data
+
+    # Print the tree
+    def PrintTree_DFT(self):
+        if self.left:
+            self.left.PrintTree_DFT()
+        print( self.data ),
+        if self.right:
+            self.right.PrintTree_DFT()
+
+
+# Use the insert method to add nodes
+root = Node(12)
+root.insert(6)
+root.insert(14)
+root.insert(3)
+root.insert(7)
+
+root.PrintTree_DFT()
+
+print("----------------")
+
+tree = Node(5)
+tree.insert(8)
+tree.insert(2)
+tree.insert(4)
+tree.insert(1)
+tree.PrintTree_DFT()
+#           5
+#         /   \
+#       2       8
+#     /   \
+#   1       4
+# Output = 1 2 4 5 8

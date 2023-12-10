@@ -1,0 +1,122 @@
+# COMP3002 assignment - Task 2B
+# Depth First & Breadth First Traversal with Dictionary-based binary trees
+
+# Search all nodes (first-come-first-serve)
+def testSearch(tree):
+    print("Node value : ", tree['value'])
+
+    if not tree['children']:
+        print("Node ", tree['value'], " has no children")
+        return
+    else:
+        print("Node ", tree['value'], " has children")
+        for child in tree['children']:
+            testSearch(child)
+
+
+        for child in tree['children']:
+            testSearch(child)
+            print("Child : ", child['value'])
+
+            if child['value'] < tree['value']:
+                print("Call search on child : ", child['value'])
+                testSearch(child)
+
+
+# Breadth First search in order of first-come-first-serve
+def breadthFirstSearch(tree):
+    print("Node value : ", tree['value'])
+
+
+
+# Depth First search in order of node values (smallest to largest)
+def depthFirstSearch(tree):
+
+    if len(tree['children']) == 2:
+        for i in range(2):
+
+            if tree['children'][i]['value'] < tree['value']:
+
+                if tree['children'][0]['value'] < tree['children'][1]['value']:
+                    depthFirstSearch(tree['children'][0])
+                    print("Node value : ", tree['value'])
+                    depthFirstSearch(tree['children'][1])
+                elif tree['children'][0]['value'] > tree['children'][1]['value']:
+                    depthFirstSearch(tree['children'][1])
+                    print("Node value : ", tree['value'])
+                    depthFirstSearch(tree['children'][0])
+
+    elif len(tree['children']) == 1:
+        depthFirstSearch(tree['children'][0])
+        print("Node value : ", tree['value'])
+    else:
+        print("Node value : ", tree['value'])
+
+
+
+            
+
+                
+       
+dictionaryTree = {
+    'value' : 5,
+    'children' : [
+        {
+            'value' : 2,
+            'children' : [
+                {
+                    'value' : 4,
+                    'children' : [
+                        {
+                            'value' : 3,
+                            'children' : []
+                        }]                
+                },
+                {
+                    'value' : 1,
+                    'children' : []
+                }]
+        },
+        {
+            'value' : 8,
+            'children' : []
+        }
+    ]}
+
+
+#print(dictionaryTree['children'][0])
+#print(len(dictionaryTree['children']))
+print("Tree = ", dictionaryTree)
+depthFirstSearch(dictionaryTree)
+print("\n")
+
+#           5
+#         /   \
+#       2       8
+#     /   \
+#   1       4
+#         /
+#       3
+
+
+
+
+
+
+
+
+
+
+
+print("----------------------")
+
+class DicNode:
+    def __init__(self, value):
+
+        self.value = value
+        self.children = []
+
+test = DicNode(5)
+test.children.append(DicNode(2))
+
+

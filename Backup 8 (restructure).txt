@@ -1,0 +1,199 @@
+# COMP3002 assignment - Task 2B
+# Depth First & Breadth First Traversal with Dictionary-based binary trees
+
+# Lorem ipsum:
+# 1. (    ) Insert algorithm
+# 2. (    ) More than two children per node
+
+# 3. (DONE) Depth first (PREORDER)
+# 4. (DONE) Depth first (INORDER)
+
+# 5. (DONE) Breadth first (PREORDER)
+# 6. ( NO ) Breadth first (INORDER)
+# 7. ( NO ) Breadth first (PREORDER) (recursive)
+
+
+# Depth First search (PREORDER)
+def depthFirstSearch_preorder(tree):
+
+    if len(tree['children']) == 2:
+        for i in range(2):
+
+            if tree['children'][i]['value'] < tree['value']:
+
+                if tree['children'][0]['value'] < tree['children'][1]['value']:
+                    print("Node value : ", tree['value'])
+                    depthFirstSearch_preorder(tree['children'][0])
+                    depthFirstSearch_preorder(tree['children'][1])
+                elif tree['children'][0]['value'] > tree['children'][1]['value']:
+                    print("Node value : ", tree['value'])
+                    depthFirstSearch_preorder(tree['children'][1])
+                    depthFirstSearch_preorder(tree['children'][0])
+
+    elif len(tree['children']) == 1:
+        print("Node value : ", tree['value'])
+        depthFirstSearch_preorder(tree['children'][0])
+    else:
+        print("Node value : ", tree['value'])
+
+
+
+# Depth First search (INORDER)
+def depthFirstSearch_inorder(tree):
+
+    if len(tree['children']) >= 2:      # Lorem ipsum - what if there are more than two arguments?
+        for i in range(len(tree['children'])):
+
+            if tree['children'][i]['value'] < tree['value']:
+
+                for q in range(len(tree['children'])):
+                    depthFirstSearch_inorder(tree['children'][q])
+                    #print("q = , ", q, " : len(tree['children']) = ", len(tree['children']), " : i = ", i)
+                    if q+1 < len(tree['children']):
+                        
+                        if q == 0:
+                            print("Node value : ", tree['value'])
+
+
+    elif len(tree['children']) == 1:
+        depthFirstSearch_inorder(tree['children'][0])
+        print("Node value : ", tree['value'])
+    else:
+        print("Node value : ", tree['value'])
+
+
+
+
+# Breadth First search (PREORDER)
+def breadthFirstSearch_preorder(tree):
+    #print("Node value : ", tree['value'], "\n")   
+    
+    queue = []
+    queue.append(tree)
+    #print(queue[0])
+
+    while(len(queue) > 0):
+        #print("queue[0] value ", queue[0]['value'])
+        print("Node value = ", queue[0]['value'])
+        tree = queue.pop(0)
+
+        if tree['children'] is not None:
+            for i in range(len(tree['children'])):
+                queue.append(tree['children'][i])
+
+
+# Breadth First search (INORDER)
+def breadthFirstSearch_inorder(tree):
+    #print("Node value : ", tree['value'], "\n")   
+    
+    queue = []
+    queue.append(tree)
+    #print(queue[0])
+
+    while(len(queue) > 0):
+        #print("queue[0] value ", queue[0]['value'])
+        print("Node value = ", queue[0]['value'])
+        tree = queue.pop(0)
+
+        if tree['children'] is not None:
+            for i in range(len(tree['children'])):
+                queue.append(tree['children'][i])
+                print("Queue append : ", tree['children'][i])
+
+       
+dictionaryTreeOriginal = {
+    'value' : 5,
+    'children' : [
+        {
+            'value' : 2,
+            'children' : [
+                {
+                    'value' : 1,
+                    'children' : []               
+                },
+                {
+                    'value' : 4,
+                    'children' : [
+                        {
+                            'value' : 3,
+                            'children' : []
+                        }] 
+                }]
+        },
+        {
+            'value' : 8,
+            'children' : []
+        }
+    ]}
+
+dictionaryTree = {
+    'value' : 5,
+    'children' : [
+        {
+            'value' : 2,
+            'children' : [
+                {
+                    'value' : 1,
+                    'children' : []               
+                },
+                {
+                    'value' : 4,
+                    'children' : [
+                        {
+                            'value' : 3,
+                            'children' : []
+                        }] 
+                }]
+        },
+        {
+            'value' : 7,
+            'children' : []
+        },
+        {
+            'value' : 8,
+            'children' : []
+        }
+    ]}
+
+#           5
+#         /   \
+#       2       8
+#     /   \
+#   1       4
+#         /
+#       3
+
+#print(dictionaryTree['children'][0])
+#print(len(dictionaryTree['children']))
+print("Tree = ", dictionaryTree, "\n")
+print("-- Tree visualisation --")
+print("            5")
+print("          /   \ ")
+print("        2       8")
+print("      /   \ ")
+print("    1       4")
+print("          / ")
+print("        3")
+
+print("\n -- Depth first traversal (PREORDER) -- ")
+print("Expected output: 5 2 1 4 3 8")
+depthFirstSearch_preorder(dictionaryTreeOriginal)
+
+print("\n -- Depth first traversal (INORDER) -- ")
+print("Expected output: 1 2 3 4 5 8")
+depthFirstSearch_inorder(dictionaryTree)
+
+print("\n -- Breadth first traversal (PREORDER) -- ")
+print("Expected output: 5 2 8 1 4 3")
+breadthFirstSearch_preorder(dictionaryTree)
+
+#print("\n -- Breadth first traversal (INORDER) -- ")
+#print("Expected output: 1 2 3 4 5 8")
+#breadthFirstSearch_inorder(dictionaryTree)
+
+
+
+
+
+
+
